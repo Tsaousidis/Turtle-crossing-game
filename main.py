@@ -20,20 +20,20 @@ def main():
     screen.onkeypress(player.go_down, "Down")
 
     game_over = False
-    while not game_over:
+    while not game_over: # Game loop continues until the player loses
         time.sleep(0.1)
         screen.update()
 
         car_manager.create_car()
         car_manager.move_cars()
 
-        # Detect collision with car
-        for car in car_manager.all_cars:
+        # Detect collision with a car
+        for car in car_manager.all_cars: # Check for collisions between the player and cars
             if car.distance(player) < 20:
                 game_over = True
                 scoreboard.game_is_over()
         
-        # Detect succesful crossing
+        # Detect successful crossing
         if player.is_at_finish_line():
             player.go_to_start()
             car_manager.level_up()
